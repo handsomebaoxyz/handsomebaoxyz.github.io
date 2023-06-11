@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>git开发流程 | 帅宝的博客</title><meta name="author" content="Handsomebao"><meta name="copyright" content="Handsomebao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、分支管理规范  Git Flow 模型  Git 流程使用规范 (图片来源：A successful Git branching model)  Git Flow 分支说明  Master 发版分支 + 保护分支。功能代码在 Release 分支上测试通过、或 BUG 已在 Hotfix 分支上修复，则需要将代码合并到 Master 分支。代码合并到 Master 分支，即代表可以随时发版，发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git开发流程">
+<meta property="og:url" content="http://example.com/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="帅宝的博客">
+<meta property="og:description" content="一、分支管理规范  Git Flow 模型  Git 流程使用规范 (图片来源：A successful Git branching model)  Git Flow 分支说明  Master 发版分支 + 保护分支。功能代码在 Release 分支上测试通过、或 BUG 已在 Hotfix 分支上修复，则需要将代码合并到 Master 分支。代码合并到 Master 分支，即代表可以随时发版，发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://handsomebaoxyz.4everland.store/top-img.png">
+<meta property="article:published_time" content="2023-01-11T08:00:22.000Z">
+<meta property="article:modified_time" content="2023-06-11T08:04:21.102Z">
+<meta property="article:author" content="Handsomebao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://handsomebaoxyz.4everland.store/top-img.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'git开发流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-06-11 16:04:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://handsomebaoxyz.4everland.store/isekai.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 收藏清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fas-list"></i><span> 友情链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/personal/"><i class="fa-fw fas fa-link"></i><span> 个人主页</span></a></li><li><a class="site-page child" href="/web3/"><i class="fa-fw fas fa-link"></i><span> 区块链与web3</span></a></li><li><a class="site-page child" href="/blog/"><i class="fa-fw fas fa-link"></i><span> 技术博客</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://handsomebaoxyz.4everland.store/top-img.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">帅宝的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 收藏清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fas-list"></i><span> 友情链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/personal/"><i class="fa-fw fas fa-link"></i><span> 个人主页</span></a></li><li><a class="site-page child" href="/web3/"><i class="fa-fw fas fa-link"></i><span> 区块链与web3</span></a></li><li><a class="site-page child" href="/blog/"><i class="fa-fw fas fa-link"></i><span> 技术博客</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">git开发流程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-11T08:00:22.000Z" title="发表于 2023-01-11 16:00:22">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-11T08:04:21.102Z" title="更新于 2023-06-11 16:04:21">2023-06-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="git开发流程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>一、分支管理规范</p>
+<ol>
+<li>Git Flow 模型</li>
+</ol>
+<p>Git 流程使用规范</p>
+<p>(图片来源：A successful Git branching model)</p>
+<ol start="2">
+<li>Git Flow 分支说明</li>
+</ol>
+<p>Master</p>
+<p>发版分支 + 保护分支。功能代码在 Release 分支上测试通过、或 BUG 已在 Hotfix 分支上修复，则需要将代码合并到 Master 分支。代码合并到 Master 分支，即代表可以随时发版，发版成功时需要基于 Master 分支上的最新提交节点打 Tag。</p>
+<p>Hotfix</p>
+<p>修复分支 + 临时分支。线上出现紧急 Bug 时，需要基于对应版本的 Tag 创建修复分支，问题修复完成时以此分支进行提测。问题修复后，需将代码合并到 Develop 和 Master 分支。</p>
+<p>基于发版 Tag 创建，最后合并到 Develop 和 Master 分支。</p>
+<p>Release</p>
+<p>预发布分支 + 临时分支。功能开发完成并合并到 Develop 分支时，基于 Develop 分支创建 Release 分支进行提测 。Release 分支上出现影响发版的 Bug 时，需要创建 Feature 分支修改 Bug;当测试通过后，需将代码合并到 Develop 和 Master 分支。</p>
+<p>基于 Develop 分支创建，最后合并到 Develop 和 Master 分支。</p>
+<p>Develop</p>
+<p>开发分支 + 保护分支。多人协作开发时的代码合并总分支，功能分支向 Develop 分支合并时，往往会有 CodeReview 流程。</p>
+<p>基于 Master 分支创建。</p>
+<p>Feature</p>
+<p>功能分支 + 临时分支。有新需求时，基于最新的 Deveop 分支创建功能分支，功能开发完成时，需将代码合并到 Develop 分支。</p>
+<p>基于 Develop 分支创建，最后合并到 Develop 分支。</p>
+<ol start="3">
+<li>Tag&amp;Branch 的区别</li>
+</ol>
+<p>Tag 和 Branch 类似，都是引用或者说者指针。在工程里 .git&#x2F;refs 目录下能够清楚的看到，各个 Tag 和 Branch 所指向的提交节点的 SHA-1 值。</p>
+<p>区别：</p>
+<p>Tag：Tag 的位置是固定的，在给指定提交打好标签以后，它就固定于此位置</p>
+<p>Branch：Branch 的位置是会不断变动的，随着分支的向前推移或者向后回滚，都在不断变化</p>
+<p>尽量使用 Tag，保存代码片段。</p>
+<p>二、Git Commit 提交规范</p>
+<ol>
+<li>Commit Message 格式</li>
+</ol>
+<p>():</p>
+<p>&lt;空行&gt;</p>
+<p>&lt;空行&gt;</p>
+<p>可以看出分为三个部分，头部、主体、底部。</p>
+<p>头部</p>
+<p>():</p>
+<p>type 类型，修改的类型级别：</p>
+<p>feat：新功能(feature)</p>
+<p>fix：修补 bug</p>
+<p>docs：文档(documentation)</p>
+<p>style： 格式(不影响代码运行的变动)</p>
+<p>refactor：重构(即不是新增功能，也不是修改 bug 的代码变动)</p>
+<p>test：增加测试</p>
+<p>chore：构建过程或辅助工具的变动</p>
+<p>scope 修改范围：</p>
+<p>主要是这次修改涉及到的部分，最好简单的概括</p>
+<p>subject 修改的副标题：</p>
+<p>主要是具体修改的功能点</p>
+<p>body：主要对本次 commit 的详细描述，可以分成多行。</p>
+<p>footer：主要放置不兼容变更和 Issue 关闭的信息。</p>
+<p>为了方便代码的快速提交，body 和 fotter 部分可以省略。</p>
+<ol start="2">
+<li>使用介绍</li>
+</ol>
+<p>需求开发或者修改 Bug 时，提交代码时要添加对应 Jira 编号：</p>
+<p>git commit -m “feat(CHESS-1217): 我的页面增加分享入口及分享功能开发”</p>
+<p>修改 Bug 时，需要指明修改代码所在模块：</p>
+<p>git commit -m “fix(分享): 修改修改部分手机分享大图为空问题”</p>
+<p>没有具体模块、或者多模块代码一起提交时，可使用其他提交方式：</p>
+<p>git commit -m “fix(BUG): 修改推送红点提示逻辑”</p>
+<ol start="3">
+<li>相关工具</li>
+</ol>
+<p>Git Hook 自定义拦截脚本：commit-msg</p>
+<p>使用环境：python3.7</p>
+<p>使用方式：</p>
+<p>打开工程目录下的 .git&#x2F;hooks 文件夹</p>
+<p>将 commit-msg 脚本复制到文件夹下，即可</p>
+<p>全局设置：通过以下方式，可全局设置，每次 git clone 时，自动将 commit-msg 脚本添加到工程的 hooks 目录中：全局设置 commit-msg。</p>
+<p>其他工具：</p>
+<p>Commitizen：辅助撰写合格 Commit message 的工具</p>
+<p>Commitlint：Commit message 规则校验工具</p>
+<ol start="4">
+<li>拓展</li>
+</ol>
+<p>GitLab 与 Jira 关联</p>
+<p>效果：Git Commit 时，在 message 里面添加工单号，可在 Jira 对应工单详情页查看到本次提交。</p>
+<p>配置：官方文档。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Handsomebao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">http://example.com/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">帅宝的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://handsomebaoxyz.4everland.store/top-img.png" data-sites="twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/11/k8s%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/"><img class="prev-cover" src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">k8s入门学习文档</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/11/vim%E7%BF%BB%E9%A1%B5/"><img class="next-cover" src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vim翻页</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://handsomebaoxyz.4everland.store/isekai.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Handsomebao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/handsomebaoxyz" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:topleek@mail3.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/06/11/k8s%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/" title="k8s入门学习文档"><img src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="k8s入门学习文档"/></a><div class="content"><a class="title" href="/2023/06/11/k8s%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/" title="k8s入门学习文档">k8s入门学习文档</a><time datetime="2023-06-11T08:14:04.000Z" title="发表于 2023-06-11 16:14:04">2023-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" title="git开发流程"><img src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git开发流程"/></a><div class="content"><a class="title" href="/2023/01/11/git%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/" title="git开发流程">git开发流程</a><time datetime="2023-01-11T08:00:22.000Z" title="发表于 2023-01-11 16:00:22">2023-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/11/vim%E7%BF%BB%E9%A1%B5/" title="vim翻页"><img src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vim翻页"/></a><div class="content"><a class="title" href="/2022/06/11/vim%E7%BF%BB%E9%A1%B5/" title="vim翻页">vim翻页</a><time datetime="2022-06-11T08:01:55.000Z" title="发表于 2022-06-11 16:01:55">2022-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/22/%E4%BC%98%E7%A7%80%E8%BF%90%E7%BB%B4%E5%8D%9A%E5%AE%A2/" title="优秀运维博客"><img src="https://handsomebaoxyz.4everland.store/top-img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="优秀运维博客"/></a><div class="content"><a class="title" href="/2022/05/22/%E4%BC%98%E7%A7%80%E8%BF%90%E7%BB%B4%E5%8D%9A%E5%AE%A2/" title="优秀运维博客">优秀运维博客</a><time datetime="2022-05-22T08:06:24.000Z" title="发表于 2022-05-22 16:06:24">2022-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Handsomebao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
